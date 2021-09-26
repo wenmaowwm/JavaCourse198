@@ -1,0 +1,9 @@
+Serial/ParallelGC:基于复制，作用于新生代内存，Serial串行ParallelGC并行
+Serial OLD/Parallel Old:基于标记整理，作用于老年代，Serial OLD串行Parallel OLD并行
+ParNew/DefNew:与ParallelGC原理相同，分别作用于年轻代和老年代，区别是相应速度优先，适合多交互的Server
+CMS：基于标记清除，作用于老年代，并发标记、并发清除，FULLGC时会整理内存，此时需要STW
+G1：基于复制+标记整理，分别作用于年轻代和老年代，可控制GC的时间，在特殊情况下会退化成Serial
+ZGC：低停顿甚至无停顿GC，适用于超大堆内存，实验阶段
+
+java8默认ParallelGC（Parallel Old）
+java9默认G1
