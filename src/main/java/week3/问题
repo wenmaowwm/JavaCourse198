@@ -1,0 +1,2 @@
+1.使用netty实现后端http访问时，week3.io.github.kimmking.gateway.outbound.httpclient4.HttpOutboundHandler.handle的60行在接受消息的时候会报NPE
+2.netty作为client时怎样可以复用client，而非每次都new一个
