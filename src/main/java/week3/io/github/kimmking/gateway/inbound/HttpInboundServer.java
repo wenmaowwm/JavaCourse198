@@ -14,9 +14,9 @@ import io.netty.handler.logging.LoggingHandler;
 
 public class HttpInboundServer {
 
-    private int port;
+    private final int port;
     
-    private String proxyServer;
+    private final String proxyServer;
 
     public HttpInboundServer(int port, String proxyServer) {
         this.port=port;
