@@ -6,6 +6,7 @@ import io.netty.handler.codec.http.DefaultFullHttpResponse;
 import io.netty.handler.codec.http.FullHttpRequest;
 import io.netty.handler.codec.http.FullHttpResponse;
 import io.netty.handler.codec.http.HttpUtil;
+import io.netty.util.ReferenceCountUtil;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -41,17 +42,7 @@ public class Aop1 {
             fullRequest.headers().add(URL_NAME, url);
         }catch (Exception e){
             System.err.println(e.getMessage());
-            if (fullRequest != null) {
-                FullHttpResponse response = new DefaultFullHttpResponse(HTTP_1_1, NO_CONTENT);
-
-                if (!HttpUtil.isKeepAlive(fullRequest)) {
-                    ctx.write(response).addListener(ChannelFutureListener.CLOSE);
-                } else {
-                    //response.headers().set(CONNECTION, KEEP_ALIVE);
-                    ctx.write(response);
-                }
-            }
-            ctx.flush();
+            throw  e;
         }
         jp.proceed();
     }

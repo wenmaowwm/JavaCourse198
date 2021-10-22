@@ -19,7 +19,10 @@ public class HttpClientTest {
             response1 = httpclient.execute(httpGet);
             System.out.println(response1.getStatusLine());
             HttpEntity entity1 = response1.getEntity();
-            return EntityUtils.toString(entity1, "UTF-8");
+            if(entity1 != null) {
+                return EntityUtils.toString(entity1, "UTF-8");
+            }
+            return response1.getStatusLine().getReasonPhrase();
         } finally {
             if (null != response1) {
                 response1.close();
@@ -28,7 +31,7 @@ public class HttpClientTest {
     }
 
     public static void main(String[] args) throws IOException {
-        String url = "http://localhost:8888/test";
+        String url = "http://localhost:8888/11test";
         String text = getAsString(url);
         System.out.println("url: " + url + " ; response: \n" + text);
     }

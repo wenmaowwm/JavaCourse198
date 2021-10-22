@@ -1,6 +1,7 @@
 package week5.homework4.frontend.inbound;
 
 import io.netty.channel.ChannelFutureListener;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.handler.codec.http.DefaultFullHttpResponse;
@@ -9,20 +10,17 @@ import io.netty.handler.codec.http.FullHttpResponse;
 import io.netty.handler.codec.http.HttpUtil;
 import io.netty.util.ReferenceCountUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import week5.homework4.ProxyBizFilter;
+
 import week5.homework4.aop.IHttpOutboundHandler;
-import week5.homework4.frontend.httpclient4.HttpOutboundHandler;
+
 
 import static io.netty.handler.codec.http.HttpResponseStatus.NO_CONTENT;
 import static io.netty.handler.codec.http.HttpVersion.HTTP_1_1;
 
 @Component
+@ChannelHandler.Sharable
 public class HttpInboundHandler extends ChannelInboundHandlerAdapter {
-
-    @Autowired
-    private ProxyBizFilter filter;
 
     @Autowired
     private IHttpOutboundHandler handler;
