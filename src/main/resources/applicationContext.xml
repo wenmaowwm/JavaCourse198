@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+       http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
+
+    <context:component-scan base-package="week5.homework2,week5.homework4"/>
+    <bean id="student" class="week5.homework1.Student">
+<!--        <property name="name" value="wwm"/>--><!-- 构造函数装配-->
+        <constructor-arg value="wwm"/><!-- setter装配-->
+    </bean>
+    <bean id="student2" class="week5.homework1.Student">
+        <!--        <property name="name" value="wwm"/>--><!-- 构造函数装配-->
+        <constructor-arg value="wwm2"/><!-- setter装配-->
+    </bean>
+    <bean id="httpInboundServer" class="week5.homework4.frontend.inbound.HttpInboundServer">
+        <property name="port" value="8888"/>
+    </bean>
+
+    <bean id="httpOutboundHandler" class="week5.homework4.frontend.httpclient4.HttpOutboundHandler">
+<!--        <property name="backendUrls">-->
+<!--            <list>-->
+<!--                <value>http://localhost:8808</value>-->
+<!--                <value>http://localhost:8808</value>-->
+<!--            </list>-->
+<!--        </property>-->
+    </bean>
+    <util:list id="students">
+        <ref bean="student"/>
+        <ref bean="student2"/>
+    </util:list>
+    <aop:aspectj-autoproxy  />
+    <aop:config>
+        <aop:pointcut expression="execution(* week5.homework4.aop.*.*(..))" id="p1" /> <!--切点-->
+        <aop:aspect ref="aop1"> <!--切面 -->
+            <aop:around method="around" pointcut-ref="p1"/> <!--前置-->
+        </aop:aspect>
+    </aop:config>
+
+
+</beans>
