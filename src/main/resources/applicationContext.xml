@@ -8,7 +8,7 @@
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
        http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
 
-    <context:component-scan base-package="week5.homework2,week5.homework4"/>
+    <context:component-scan base-package="week5.homework2,week5.homework4, week5.homework10"/>
     <bean id="student" class="week5.homework1.Student">
 <!--        <property name="name" value="wwm"/>--><!-- 构造函数装配-->
         <constructor-arg value="wwm"/><!-- setter装配-->
