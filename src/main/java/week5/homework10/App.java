@@ -10,6 +10,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import week5.homework10.Dto.User;
 import week5.homework10.impl.UserDaoImpl;
 
+import java.sql.SQLException;
 import java.sql.SQLOutput;
 
 @SpringBootApplication
@@ -22,11 +23,11 @@ public class App {
     UserDao userDao;
 
     @Bean
-    public void test(){
+    public void test() throws SQLException {
         System.out.println("begin");
         userDao.addUser(new User(1L,"wwm"));
         userDao.updateUser(new User(1L,"wwm123"));
         System.out.println(userDao.queryUser(1));
-        userDao.deleteUser(1);
+        //userDao.deleteUser(1);
     }
 }
